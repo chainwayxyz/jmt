@@ -331,6 +331,7 @@ impl<H: SimpleHasher> SparseMerkleProof<H> {
                         // Step 3: we compute the new Merkle root
                         Ok(new_merkle_path.root_hash())
                     } else {
+                        self.verify_nonexistence(old_root_hash, new_element_key)?;
                         let new_merkle_path = self.compute_new_merkle_path_on_split(
                             leaf_node,
                             new_element_key,
